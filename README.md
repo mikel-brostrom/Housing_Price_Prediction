@@ -4,7 +4,7 @@ The idea of this project was to create a predictor on the california housing dat
 
 ## The data
 
-The data is comprised of 8 attrubutes
+The data is comprised of 8 attributes
 
 * MedInc median income in block
 
