@@ -22,8 +22,8 @@ The data is comprised of 8 attrubutes
 
 * Longitude house block longitude
 
-as well as the target, the husing price
+as well as the target, the housing price
 
 ## Conclusion
 
-The random forest model trained on the boxcox tranformed signals gave the best model with an R2 score of 83. Not bad! The models trained on the first two principal comonentes gave a poor result even if they accounted for ~96% of the data variance.
+The random forest model trained on the boxcox tranformed signals gave the best model with an R2 score of 83. Not bad! The models trained on the first two principal componentes gave a poor result even if they accounted for ~96% of the data variance.
