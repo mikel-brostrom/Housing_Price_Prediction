@@ -26,4 +26,4 @@ as well as the target, the husing price
 
 ## Conclusion
 
-The random forest model trained on the boxcox tranformed signals gave the best model with an R2 score of 83. The models trained on the PCA tranformed signals gave a poor result even if the chosen two accounted for ~96% of the data variance.
+The random forest model trained on the boxcox tranformed signals gave the best model with an R2 score of 83. Not bad! The models trained on the first two principal comonentes gave a poor result even if they accounted for ~96% of the data variance.
