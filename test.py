@@ -29,5 +29,5 @@ def test(test_loader, model, device):
     # using chain.from_iterables 
     predictions = list(chain.from_iterable(predictions))
     labels = list(chain.from_iterable(labels)) 
-    return metrics.r2_score(labels, predictions)
+    return metrics.r2_score(labels, predictions), metrics.mean_absolute_error(labels, predictions)
 

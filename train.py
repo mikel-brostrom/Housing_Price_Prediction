@@ -12,13 +12,16 @@ import numpy as np
 from tqdm import tqdm
 from test import test
 from preprocessing import Preprocessing
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn import metrics
 
 
 def train(device, crit, optimizer, model, train_loader):
 
     log_interval = 1000
     start_epoch = 0
-    epochs = 400
+    epochs = 150
     # the number of batches
     nb = train_loader.__len__()
     
@@ -78,13 +81,13 @@ def main():
     df_total = pd.concat([df_data, df_target], axis=1, sort=False)
 
     preprocessing = Preprocessing()
-    df_total = preprocessing.boxcox_transform(df_total)
+    df_total = preprocessing.standard_scaler(df_total)
 
-    # slipt the data
+    # split the data
     df_target = df_total.loc[:, df_total.columns == 'Target']
     df_data = df_total.loc[:, df_total.columns != 'Target']
 
-    xtrain, xtest, ytrain, ytest = train_test_split(df_data,df_target,test_size=0.1,random_state=0)
+    xtrain, xtest, ytrain, ytest = train_test_split(df_data, df_target, test_size=0.1, random_state=0)
 
     xtrain = xtrain.to_numpy()
     xtest = xtest.to_numpy()
@@ -94,18 +97,19 @@ def main():
     # create dataloaders for train and test
     dataset_train = HousesDataset(xtrain, ytrain)
     dataset_test = HousesDataset(xtest, ytest)
+
     train_loader = DataLoader(dataset_train,
                             batch_size=512,
                             num_workers=1,
                             shuffle=True,
                             pin_memory=True)
-    test_loader = DataLoader(dataset_train,
+    test_loader = DataLoader(dataset_test,
                             batch_size=512,
                             num_workers=1,
                             shuffle=True,
                             pin_memory=True)
 
-    # train and evaluate
+    # train and evaluate NN
     lr = 0.001
     use_cuda = torch.cuda.is_available()
     device = torch.device("cuda" if use_cuda else "cpu")
@@ -115,8 +119,28 @@ def main():
     crit = MSELoss()
 
     train(device, crit, optimizer, model, train_loader)
-    score = test(test_loader, model, device)
-    print('r2 score:', score)
+    r2, MAE = test(test_loader, model, device)
+    print('\tNN')
+    print('r2 score:', r2)
+    print('MAE score:', MAE)
+
+    # train and evaluate other models
+    regressor = LinearRegression()
+    regressor.fit(xtrain, ytrain)
+    preds = regressor.predict(xtest)
+    print('\tLinear regressor')
+    print('r2 score:', metrics.r2_score(ytest, preds))
+    print('MAE score:', metrics.mean_absolute_error(ytest, preds))
+    
+    
+    rf = RandomForestRegressor(random_state=42)
+    rf.fit(xtrain, ytrain)
+    preds = rf.predict(xtest)
+    print('\tRandom forest')
+    print('r2 score:', metrics.r2_score(ytest, preds))
+    print('MAE score:', metrics.mean_absolute_error(ytest, preds))
+
+
 
 
 
