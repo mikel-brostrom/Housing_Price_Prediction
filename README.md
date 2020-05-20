@@ -24,6 +24,32 @@ The data is comprised of 8 attributes
 
 as well as the target, the housing price
 
+## Training
+
+`train.py` runs the training on the sklearn california housing dataset:
+
+```bash
+python3 train.py
+```
+
+Training output example:
+
+```bash
+...
+
+Train Epoch: 600 [0/18576 (0%)] Loss: 0.030689
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 37/37 [00:00<00:00, 155.59it/s]
+37
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 37/37 [00:00<00:00, 159.08it/s]
+r2 score: 0.9603513041286216
+...
+```
+
+### The network
+
+We use a stack fully connected layers with ReLU. The r2 score and MAE was used for evaluating the model 
+
 ## Conclusion
 
 The random forest model trained on the boxcox tranformed signals gave the best model with an R2 score of 83. Not bad! The models trained on the first two principal componentes gave a poor result even if they accounted for ~96% of the data variance.
+
