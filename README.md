@@ -59,5 +59,5 @@ We use a stack fully connected layers with ReLU. The r2 score and MAE was used f
 
 ## Conclusion
 
-The random forest model trained on the boxcox tranformed signals gave the best model with an R2 score of 83. Not bad! The models trained on the first two principal componentes gave a poor result even if they accounted for ~96% of the data variance.
+The neural network trained on the standardized signals gave the best model with an R2 score of 82.4. The models trained on the first two principal componentes gave a poor result even if they accounted for ~96% of the data variance.
 
