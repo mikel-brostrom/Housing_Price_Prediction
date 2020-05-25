@@ -26,7 +26,7 @@ as well as the target, the housing price
 
 ## Training
 
-`train.py` runs the training on the sklearn california housing dataset:
+`train.py` runs the training for three different models: NN, linear regression and random forest on the scikit-learn california housing dataset:
 
 ```bash
 python3 train.py
