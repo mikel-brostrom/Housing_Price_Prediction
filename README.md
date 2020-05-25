@@ -55,7 +55,7 @@ MAE score: 0.2837869675577879
 
 ### The network
 
-We use a stack fully connected layers with ReLU. The r2 score and MAE was used for evaluating the model 
+We use a stack fully connected layers with ReLU. The r2 score and MAE was used for evaluating the models 
 
 ## Conclusion
 
